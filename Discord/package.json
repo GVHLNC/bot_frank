@@ -1,0 +1,23 @@
+{
+  "name": "translatebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord-giveaways": "^4.2.1",
+    "discord.js": "github:discordjs/discord.js",
+    "emoji": "^0.3.2",
+    "ffmpeg-static": "^4.2.7",
+    "ms": "^2.1.2",
+    "opusscript": "0.0.7",
+    "simple-youtube-api": "^5.2.1",
+    "websocket": "^1.0.31",
+    "ytdl-core": "^3.2.2",
+    "ytdl-core-discord": "^1.2.1"
+  }
+}
