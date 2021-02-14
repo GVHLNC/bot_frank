@@ -42,26 +42,31 @@ for (const file of cmdFiles) {
 } //end
  
 // receving message
-client.on('message', message => {  
-    
-    if (message.author == client.user){
-        return
-    }
-    if(message.content.startsWith("F")){
-        let lower = message.content.toLowerCase()
-        let fullCommand = lower.substr(2) //nombre de caractere + espace
-        let splitCommand = fullCommand.split(" ")
-        let primaryCommand = splitCommand[0]
-        let arguments = splitCommand.slice(1)
-
-
-        //forEach(primaryCommand => require(`./commands/${primaryCommand}`))
-        if(MesFonctions[primaryCommand]){
-            return MesFonctions[primaryCommand](arguments, message, client, primaryCommand)
+client.on("message", message => {
+    if (message.author.bot) return;
+    if (!message.guild) return;
+   
+    if(message.content.startsWith(PREFIX)) { //IF MESSSAGE STARTS WITH MINE BOT PREFIX
+     
+        const args = message.content.slice(PREFIX.length).trim().split(/ +/) //removing prefix from args
+        const command = args.shift().toLowerCase();
+        
+        if(!client.commands.has(command)) {
+        return;
+        } 
+        
+        try  
+        { //TRY TO GET COMMAND AND EXECUTE
+            client.commands.get(command).run(client, message, args)
+            //COMMAND LOGS
+            console.log(`${message.guild.name}: ${message.author.tag} Used ${client.commands.get(command).name} in #${message.channel.name}`)
+        } catch (err) { //IF IT CATCH ERROR
+            console.log(err)
+            message.reply("I am getting error on using this command")
         }
-        else
-            return message.channel.send("``Oups... je pense que tu t'es tromper``")
+        
     }
-})
+
+});
  
 client.login(TOKEN);
